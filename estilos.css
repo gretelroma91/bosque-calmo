@@ -1,0 +1,195 @@
+/* ===========================
+   BOSQUE CALMO – Estilos mejorados
+   Archivo: /css/estilos.css
+   =========================== */
+
+/* --------- Paleta --------- */
+:root{
+  --bc-bg: #FAF9F5;         /* crema suave */
+  --bc-ink: #374030;        /* texto principal (verde grisáceo) */
+  --bc-ink-muted: #6F7767;  /* texto secundario */
+  --bc-brand: #597045;      /* verde bosque */
+  --bc-brand-2: #8BA276;    /* verde suave */
+  --bc-accent: #C9BAA3;     /* beige/kraft */
+  --bc-lavender: #B7A4CC;   /* acento lavanda */
+  --bc-white: #FFFFFF;
+
+  --bc-card-border: rgba(0,0,0,.06);
+  --bc-shadow: 0 8px 22px rgba(0,0,0,.08);
+}
+
+/* --------- Base --------- */
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+html, body{ height: 100%; }
+body{
+  background: var(--bc-bg);
+  color: var(--bc-ink);
+  font-family: "Archivo", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
+img{ 
+  max-width: 100%; 
+  height: auto; 
+  display: block; 
+}
+
+/* Foco accesible */
+:focus-visible{
+  outline: 3px solid var(--bc-lavender);
+  outline-offset: 2px;
+}
+
+/* Skip-link visible al tab */
+.skip-link{
+  position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+}
+.skip-link:focus{
+  position: static; width: auto; height: auto; padding: .5rem 1rem; background: #fff; border-radius: .5rem;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bc-lavender) 40%, transparent);
+}
+
+/* --------- Enlaces --------- */
+a{
+  color: var(--bc-brand);
+  text-decoration-thickness: .08em;
+  text-underline-offset: .15em;
+}
+a:hover{ color: #3f5931; }
+
+/* --------- Navbar --------- */
+.navbar{
+  background: var(--bc-white) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,.05);
+}
+.navbar .nav-link{
+  font-weight: 500;
+  color: var(--bc-ink);
+}
+.navbar .nav-link.active{ color: var(--bc-brand); }
+
+/* === Logo Bosque Calmo: tamaño correcto y adaptable === */
+:root{
+  /* Ajustá estos valores si querés más/menos tamaño */
+  --logo-h-m: 40px;  /* móvil */
+  --logo-h-t: 48px;  /* tablet */
+  --logo-h-d: 100px;  /* desktop */
+}
+
+/* Evita que la barra se deforme y centra verticalmente */
+.navbar { padding-block: .6rem; }
+.navbar-brand{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: calc(var(--logo-h-m) + 12px);
+}
+
+/* LOGO: controla por ALTURA para no deformar, ancho automático */
+.navbar-brand .logo-img{
+  height: var(--logo-h-m) !important;
+  width: auto !important;      /* anula width="300" del HTML si existiera */
+  display: block;
+  max-width: 100%;             /* por si el contenedor es angosto */
+}
+
+/* Breakpoints responsivos */
+@media (min-width: 768px){
+  .navbar-brand { min-height: calc(var(--logo-h-t) + 12px); }
+  .navbar-brand .logo-img{ height: var(--logo-h-t) !important; }
+}
+@media (min-width: 1200px){
+  .navbar-brand { min-height: calc(var(--logo-h-d) + 12px); }
+  .navbar-brand .logo-img{ height: var(--logo-h-d) !important; }
+}
+
+/* Opcional: si el logo es muy claro, darle colchón sin deformar la barra */
+/*
+.navbar-brand .logo-img{ filter: drop-shadow(0 1px 0 rgba(0,0,0,.06)); }
+*/
+
+
+/* --------- Botones de marca --------- */
+.btn-brand{
+  --bs-btn-bg: var(--bc-brand);
+  --bs-btn-border-color: var(--bc-brand);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: #3f5931;
+  --bs-btn-hover-border-color: #3f5931;
+  --bs-btn-active-bg: #3f5931;
+}
+.btn-outline-brand{
+  --bs-btn-color: var(--bc-brand);
+  --bs-btn-border-color: var(--bc-brand);
+  --bs-btn-hover-bg: var(--bc-brand);
+  --bs-btn-hover-border-color: var(--bc-brand);
+  --bs-btn-hover-color: #fff;
+}
+
+/* --------- Hero (tu section .bg-brand-subtle) --------- */
+/* Degradado + textura opcional. Poné la textura en /imagenes/texturas/hojas.png */
+.bg-brand-subtle{
+  position: relative;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(183,164,204,.18), transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, rgba(137,162,118,.15), transparent 60%),
+    linear-gradient(180deg, #fff 0%, #fff 40%, var(--bc-bg) 100%);
+}
+.bg-brand-subtle::after{
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("../imagenes/texturas/hojas.png");
+  background-repeat: repeat;
+  background-size: 600px 600px;
+  opacity: .06;
+  pointer-events: none;
+}
+
+/* El texto destacado del hero */
+.lead{ color: var(--bc-ink-muted); }
+
+/* Imagen dentro del .ratio ya tiene clase .object-fit-cover en tu HTML */
+.object-fit-cover{ object-fit: cover; }
+
+/* --------- Cards --------- */
+.card{
+  border: 1px solid var(--bc-card-border);
+  border-radius: 1rem;
+  box-shadow: var(--bc-shadow);
+}
+.card .card-img-top{
+  height: clamp(180px, 24vw, 240px);
+  object-fit: cover;
+}
+.card h3, .card .h5{ color: var(--bc-ink); }
+
+/* --------- Formularios (cuando uses contacto.html) --------- */
+.form-control:focus, .form-select:focus{
+  border-color: var(--bc-brand);
+  box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--bc-brand) 25%, transparent);
+}
+.form-check-input:checked{
+  background-color: var(--bc-brand);
+  border-color: var(--bc-brand);
+}
+
+/* --------- Footer --------- */
+footer{ background: #fff; }
+footer small{ color: color-mix(in srgb, var(--bc-ink) 70%, #fff); }
+
+/* --------- Utilidades --------- */
+.rounded-4{ border-radius: 1rem !important; }
+
+/* Animación sutil en botones */
+@media (prefers-reduced-motion: no-preference){
+  .btn-brand, .btn-outline-brand{
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-brand:hover, .btn-outline-brand:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  }
+}
+
